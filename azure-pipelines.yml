@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: dependency-check-build-task@6
+  inputs:
+    projectName: 'Seminaire 2021'
+    scanPath: '**/*.csproj'
+    format: 'HTML, JSON, JUNIT'
+    failOnCVSS: '5'
+- task: PublishTestResults@2
+  condition: always()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'dependency-check/*junit.xml'
+    searchFolder: '$(Common.TestResultsDirectory)'
+    testRunTitle: 'Dependency Check'
+# - task: AzurePowerShell@5
+#   displayName: Activation accès Sonarqube
+#   inputs:
+#     azureSubscription: 'Sponsoring Microsoft Azure(34921382-2dee-483a-9c2b-f632eb467dba)'
+#     ScriptType: 'FilePath'
+#     ScriptPath: '$(System.DefaultWorkingDirectory)/DeploymentScript/SonarQubeNSGManager.ps1'
+#     ScriptArguments: '-resourceGroupName JBO-DEV -networkSecurityGroupName sonarqube-nsg  -securityRuleName azuredevops-agent -allowOrDeny Allow -priority 3010'
+#     azurePowerShellVersion: 'LatestVersion'
+# - task: SonarQubePrepare@5
+#   inputs:
+#     SonarQube: 'Sonarqube'
+#     scannerMode: 'MSBuild'
+#     projectKey: 'Seminaire_2021_Seminaire_2021'
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'build'
+# - task: SonarQubeAnalyze@5
+# - task: SonarQubePublish@5
+#   inputs:
+#     pollingTimeoutSec: '300'
+# - task: AzurePowerShell@5
+#   condition: always()
+#   displayName: Désactivation accès Sonarqube
+#   inputs:
+#     azureSubscription: 'Sponsoring Microsoft Azure(34921382-2dee-483a-9c2b-f632eb467dba)'
+#     ScriptType: 'FilePath'
+#     ScriptPath: '$(System.DefaultWorkingDirectory)/DeploymentScript/SonarQubeNSGManager.ps1'
+#     ScriptArguments: '-resourceGroupName JBO-DEV -networkSecurityGroupName sonarqube-nsg  -securityRuleName azuredevops-agent -allowOrDeny Deny -priority 3010'
+#     azurePowerShellVersion: 'LatestVersion'
