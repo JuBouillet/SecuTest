@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="UmbracoForms" Version="8.4.1" />
+    <PackageReference Include="UmbracoForms" Version="8.8.0" />
   </ItemGroup>
 
 </Project>
