@@ -57,7 +57,7 @@ jobs:
       with:
         project: 'test'
         path: '.'
-        format: 'XML'  
+        format: 'JUNIT'  
         args: >
           --failOnCVSS 1
           --enableRetired
