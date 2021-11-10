@@ -57,12 +57,12 @@ jobs:
       with:
         project: 'test'
         path: '.'
-        format: 'HTML'    
+        format: 'XML'  
         args: >
-          --failOnCVSS 7
+          --failOnCVSS 4
           --enableRetired
-    - name: Upload Test results
-      uses: actions/upload-artifact@master
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v2
+      if: always() # always run even if the previous step fails
       with:
-         name: Depcheck report
-         path: ${{github.workspace}}/reports
+        report_paths: '**/reports/dependency-check-report.xml'
