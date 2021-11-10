@@ -10,7 +10,7 @@ namespace Eliade.Seminaire._2021.ConsoleApp
 		{
 			Umbraco.Core.Cache.AppCaches test = new();
 			var test2 = test.RequestCache;
-			string password = "Cec1E3tVr@imentP@sS3cure23";
+			string password = "Cec1E3tVr@imentP@sS3cure232";
 			Console.WriteLine("Hello World!");
 		}
 	}
